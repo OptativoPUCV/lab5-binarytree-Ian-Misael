@@ -49,7 +49,7 @@ void insertTreeMap(TreeMap * tree, void* key, void * value) {
     } else {
         TreeNode * current = tree->root;
         while(true) {
-            return
+            return;
         }
     }
     
