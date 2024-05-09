@@ -82,7 +82,6 @@ TreeNode * minimum(TreeNode * node){
     if (node == NULL) return NULL;
     while (node->left != NULL) {
         node = node->left;
-        
     }
     return node;
 }
@@ -120,8 +119,10 @@ Pair * upperBound(TreeMap * tree, void* key) {
 }
 
 Pair * firstTreeMap(TreeMap * tree) {
-    
-    return NULL;
+    TreeNode * node = minimum(tree->root);
+    if (node == NULL) return NULL;
+    tree->current = node;
+    return node->pair;
 }
 
 Pair * nextTreeMap(TreeMap * tree) {
