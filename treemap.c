@@ -88,10 +88,10 @@ TreeNode * minimum(TreeNode * node){
 
 void removeNode(TreeMap * tree, TreeNode* node) {
     TreeNode* aux = tree->root;
-    TreeNode* parent = NULL;
+    //TreeNode* parent = NULL;
 
     while (aux != NULL && aux != node) {
-        parent = aux;
+        //parent = aux;
         if (tree->lower_than(node->pair->key, aux->pair->key))
             aux = aux->left;
         else
