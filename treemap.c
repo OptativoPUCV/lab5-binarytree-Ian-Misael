@@ -190,7 +190,7 @@ Pair * upperBound(TreeMap * tree, void* key) {
         tree->current = ub;
         return ub->pair;
     }
-    return ub->pair;
+    return NULL;
 }
 
 Pair * firstTreeMap(TreeMap * tree) {
