@@ -87,10 +87,22 @@ TreeNode * minimum(TreeNode * node){
 }
 
 void removeNode(TreeMap * tree, TreeNode* node) {
+    TreeNode* aux = tree->root;
     TreeNode* parent = NULL;
-    if (node->left == NULL && node->right == NULL) {
-        if (node != tree->root) {
-            if (parent->left == node) {
+
+    while (aux != NULL && aux != node) {
+        parent = aux;
+        if (tree->lower_than(node->pair->key, aux->pair->key) == 1) {
+            aux = aux->left;
+        } else {
+            aux = aux->right;
+        }
+    }
+    if (aux == NULL) return;
+
+    if (aux->left == NULL && aux->right == NULL) {
+        if (aux != tree->root) {
+            if (parent->left == aux) {
                 parent->left = NULL;
             } else {
                 parent->right = NULL;
@@ -98,17 +110,17 @@ void removeNode(TreeMap * tree, TreeNode* node) {
         } else {
             tree->root = NULL;
         }
-        free(node);
+        free(aux);
     } 
-    else if (node->left == NULL || node->right == NULL) {
+    else if (aux->left == NULL || aux->right == NULL) {
         TreeNode* child;
-        if (node->left != NULL) {
-            child = node->left;
+        if (aux->left != NULL) {
+            child = aux->left;
         } else {
-            child = node->right;
+            child = aux->right;
         }
-        if (node != tree->root) {
-            if (parent->left == node) {
+        if (aux != tree->root) {
+            if (parent->left == aux) {
                 parent->left = child;
                 if (child != NULL) {
                     child->parent = parent;
@@ -125,16 +137,16 @@ void removeNode(TreeMap * tree, TreeNode* node) {
                 child->parent = NULL;
             }
         }
-        free(node);
+        free(aux);
     }
     else {
-        TreeNode* successor = minimum(node->right);
+        TreeNode* successor = minimum(aux->right);
         int succKey = *(int*)successor->pair->key;
         void* succValue = successor->pair->value;
-        if (successor->parent == node) {
-            node->right = successor->right;
+        if (successor->parent == aux) {
+            aux->right = successor->right;
             if (successor->right != NULL) {
-                successor->right->parent = node;
+                successor->right->parent = aux;
             }
         } else {
             successor->parent->left = successor->right;
@@ -142,11 +154,11 @@ void removeNode(TreeMap * tree, TreeNode* node) {
                 successor->right->parent = successor->parent;
             }
             successor->parent->left = successor->right;
-            successor->parent = node->parent;
+            successor->parent = aux->parent;
         }
         free(successor);
-        node->pair->key = &succKey;
-        node->pair->value = succValue;
+        aux->pair->key = &succKey;
+        aux->pair->value = succValue;
     }
 }
 
