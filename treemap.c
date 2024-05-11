@@ -144,7 +144,8 @@ void removeNode(TreeMap * tree, TreeNode* node) {
             if (successor->right != NULL) {
                 successor->right->parent = successor->parent;
             }
-            successor->parent = NULL;
+            successor->parent->left = successor->right;
+            successor->parent = aux->parent;
         }
         free(successor);
         aux->pair->key = &succKey;
