@@ -134,7 +134,18 @@ void removeNode(TreeMap * tree, TreeNode* node) {
         TreeNode* successor = minimum(aux->right);
         int succKey = *(int*)successor->pair->key;
         void* succValue = successor->pair->value;
-        removeNode(tree, successor);
+        if (successor->parent == aux) {
+            aux->right = successor->right;
+            if (successor->right != NULL) {
+                successor->right->parent = aux;
+            }
+        } else {
+            successor->parent->left = successor->right;
+            if (successor->right != NULL) {
+                successor->right->parent = successor->parent;
+            }
+        }
+        free(successor);
         aux->pair->key = &succKey;
         aux->pair->value = succValue;
     }
