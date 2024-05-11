@@ -298,3 +298,20 @@ Sat 11 May 2024 03:48:18 AM UTC:
  tests:  20|2
 total_score: 45/70
 66b653e
+Sat 11 May 2024 03:56:42 AM UTC: 
+ treemap.c | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+In file included from test.c:4:
+treemap.c: In function ‘nextTreeMap’:
+treemap.c:214:77: error: expected ‘)’ before ‘{’ token
+  214 |                     tree->lower_than(aux->pair->key, aux->parent->pair->key) {
+      |                                                                             ^~
+      |                                                                             )
+treemap.c:213:23: note: to match this ‘(’
+  213 |                 while (aux->parent != NULL &&
+      |                       ^
+treemap.c:218:13: error: expected expression before ‘}’ token
+  218 |             }
+      |             ^
+Compilation failed
+496b6d4
