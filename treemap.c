@@ -199,6 +199,28 @@ Pair * firstTreeMap(TreeMap * tree) {
 }
 
 Pair * nextTreeMap(TreeMap * tree) {
+    if (tree == NULL || tree->root == NULL) return NULL;
+    if (tree->current == NULL) {
+        tree->current = minimum(tree->root);
+        return tree->current->pair;
+    }
+    TreeNode * aux = tree->current;
+    if (aux->right != NULL) {
+        tree->current = minimum(aux->right);
+        return tree->current->pair;
+    } else {
+        while (aux->parent != NULL && 
+        tree->lower_than(aux->pair->key, aux->parent->pair->key) == 0)) {
+            aux = aux->parent;
+            }
+        tree->current = aux->parent;
+        if (tree->current != NULL) return tree->current->pair;
+    }
+    return NULL;
+}
+
+/*
+Pair * nextTreeMap(TreeMap * tree) {
     TreeNode * aux = tree->current;
     if (aux == NULL || (aux->parent == NULL && aux->right == NULL)) return NULL;
     if (aux->right != NULL) {
@@ -221,3 +243,4 @@ Pair * nextTreeMap(TreeMap * tree) {
     }
     return NULL;
 }
+*/
