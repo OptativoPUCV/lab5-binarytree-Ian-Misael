@@ -90,8 +90,15 @@ void removeNode(TreeMap * tree, TreeNode* node) {
     TreeNode* aux = tree->root;
     TreeNode* parent = NULL;
 
-    aux->pair = searchTreeMap(tree, node->pair->key);
-    if (aux->pair == NULL) return;
+    while (aux != NULL && aux != node) {
+        parent = aux;
+        if (tree->lower_than(node->pair->key, aux->pair->key) == 1) {
+            aux = aux->left;
+        } else {
+            aux = aux->right;
+        }
+    }
+    if (aux == NULL) return;
 
     if (aux->left == NULL && aux->right == NULL) {
         if (aux != tree->root) {
