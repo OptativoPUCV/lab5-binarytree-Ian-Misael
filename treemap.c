@@ -180,7 +180,7 @@ Pair * upperBound(TreeMap * tree, void* key) {
         if (tree->lower_than(node->pair->key, key) == 1) {
             node = node->right;
         } else {
-            if (node->right == NULL) return node->pair;
+            if (node->left == NULL) return node->pair;
             node = node->left;            
         }  
     } 
