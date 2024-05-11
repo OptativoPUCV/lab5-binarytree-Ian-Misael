@@ -218,29 +218,3 @@ Pair * nextTreeMap(TreeMap * tree) {
     }
     return NULL;
 }
-
-/*
-Pair * nextTreeMap(TreeMap * tree) {
-    TreeNode * aux = tree->current;
-    if (aux == NULL || (aux->parent == NULL && aux->right == NULL)) return NULL;
-    if (aux->right != NULL) {
-        tree->current = minimum(aux->right);
-        return tree->current->pair;
-    } else {
-        if (aux->parent != NULL) {
-            if (tree->lower_than(aux->pair->key, aux->parent->pair->key) == 1) {
-                tree->current = aux->parent;
-            } 
-            else {
-                while (aux->parent != NULL && 
-                    tree->lower_than(aux->pair->key, aux->parent->pair->key)) {
-                    aux = aux->parent;
-                }
-                tree->current = aux->parent;
-            }
-            if (tree->current != NULL) return tree->current->pair;
-        }
-    }
-    return NULL;
-}
-*/
